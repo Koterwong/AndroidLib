@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <!--SlideLayout 图片轮播-->
+  <declare-styleable name="SlideLayout">
+    <attr name="indicator_size" format="dimension"/>
+    <attr name="indicator_margin" format="dimension"/>
+    <!-- indicator select -->
+    <attr name="bg_selected" format="reference"/>
+
+    <!--图片缩放方式-->
+    <attr name="scaleType" format="enum">
+      <enum name="centerCrop" value="1"/>
+      <enum name="fitXY" value="6"/>
+    </attr>
+
+    <attr name="IndicatorGravity" format="enum">
+      <enum name="center" value="1"/>
+      <enum name="right" value="2"/>
+    </attr>
+
+  </declare-styleable>
+
+  <!--SpotsDialog-->
+  <declare-styleable name="SpotsDialog">
+    <attr name="DialogTitleAppearance" format="reference"/>
+    <attr name="DialogTitleText" format="string|reference"/>
+    <attr name="DialogSpotColor" format="reference|color"/>
+    <attr name="DialogSpotCount" format="integer"/>
+  </declare-styleable>
+
+  <!--StateButton 自带点击效果的Button-->
+  <declare-styleable name="StateButton">
+
+    <!--text color-->
+    <attr name="normalTextColor" format="color|reference"/>
+    <attr name="pressedTextColor" format="color|reference"/>
+    <attr name="unableTextColor" format="color|reference"/>
+
+    <!--stroke width and color, dash width, dash gap-->
+    <attr name="strokeDashWidth" format="dimension|reference"/>
+    <attr name="strokeDashGap" format="dimension|reference"/>
+    <attr name="normalStrokeWidth" format="dimension|reference"/>
+    <attr name="pressedStrokeWidth" format="dimension|reference"/>
+    <attr name="unableStrokeWidth" format="dimension|reference"/>
+    <attr name="normalStrokeColor" format="color|reference"/>
+    <attr name="pressedStrokeColor" format="color|reference"/>
+    <attr name="unableStrokeColor" format="color|reference"/>
+
+    <!--background color-->
+    <attr name="normalBackgroundColor" format="color|reference"/>
+    <attr name="pressedBackgroundColor" format="color|reference"/>
+    <attr name="unableBackgroundColor" format="color|reference"/>
+
+    <!--background radius-->
+    <attr name="radius" format="dimension|reference"/>
+    <attr name="round" format="boolean|reference"/>
+
+    <!--animation duration-->
+    <attr name="animationDuration" format="integer|reference"/>
+
+  </declare-styleable>
+
+  <!--AutoLinkStyleTextView-->
+  <declare-styleable name="AutoLinkStyleTextView">
+    <attr name="AutoLinkStyleTextView_text_value" format="string|reference"/>
+    <attr name="AutoLinkStyleTextView_default_color" format="color|reference"/>
+    <attr name="AutoLinkStyleTextView_has_under_line" format="boolean"/>
+  </declare-styleable>
+
+  <!-- ExpandTextView -->
+  <declare-styleable name="ExpandTextView">
+    <attr name="titleText" format="reference|string"/>
+    <attr name="contentText" format="reference|string"/>
+    <attr name="foldHint" format="reference|string"/>
+    <attr name="expandHint" format="reference|string"/>
+    <attr name="textTitleColor" format="reference|color"/>
+    <attr name="textContentColor" format="reference|color"/>
+    <attr name="textHintColor" format="reference|color"/>
+    <attr name="indicateImage" format="reference"/>
+    <attr name="minVisibleLines" format="integer"/>
+    <attr name="titleTextSize" format="dimension"/>
+    <attr name="contentTextSize" format="dimension"/>
+    <attr name="hintTextSize" format="dimension"/>
+    <attr name="animDuration" format="integer"/>
+  </declare-styleable>
+
+  <declare-styleable name="RoundImageView">
+    <attr name="borderRadius" format="dimension"/>
+    <attr name="imgType">
+      <enum name="circle" value="0"/>
+      <enum name="round" value="1"/>
+    </attr>
+  </declare-styleable>
+
+  <!--NineGridView-->
+  <declare-styleable name="NineGridView">
+    <attr name="ngv_singleImageSize" format="dimension"/>
+    <attr name="ngv_singleImageRatio" format="float"/>
+    <attr name="ngv_gridSpacing" format="dimension"/>
+    <attr name="ngv_maxSize" format="integer"/>
+    <attr name="ngv_mode" format="enum">
+      <enum name="fill" value="0"/>
+      <enum name="grid" value="1"/>
+    </attr>
+  </declare-styleable>
+
+  <!--CircleIndicator-->
+  <declare-styleable name="CircleIndicator">
+    <attr name="ci_width" format="dimension"/>
+    <attr name="ci_height" format="dimension"/>
+    <attr name="ci_margin" format="dimension"/>
+    <attr name="ci_animator" format="reference"/>
+    <attr name="ci_animator_reverse" format="reference"/>
+    <attr name="ci_drawable" format="reference"/>
+    <attr name="ci_drawable_unselected" format="reference"/>
+
+    <attr name="ci_orientation" format="enum">
+      <!-- Defines an horizontal widget. -->
+      <enum name="horizontal" value="0"/>
+      <!-- Defines a vertical widget. -->
+      <enum name="vertical" value="1"/>
+    </attr>
+
+    <attr name="ci_gravity">
+      <!-- Push object to the top of its container, not changing its size. -->
+      <flag name="top" value="0x30"/>
+      <!-- Push object to the bottom of its container, not changing its size. -->
+      <flag name="bottom" value="0x50"/>
+      <!-- Push object to the left of its container, not changing its size. -->
+      <flag name="left" value="0x03"/>
+      <!-- Push object to the right of its container, not changing its size. -->
+      <flag name="right" value="0x05"/>
+      <!-- Place object in the vertical center of its container, not changing its size. -->
+      <flag name="center_vertical" value="0x10"/>
+      <!-- Grow the vertical size of the object if needed so it completely fills its container. -->
+      <flag name="fill_vertical" value="0x70"/>
+      <!-- Place object in the horizontal center of its container, not changing its size. -->
+      <flag name="center_horizontal" value="0x01"/>
+      <!-- Grow the horizontal size of the object if needed so it completely fills its container. -->
+      <flag name="fill_horizontal" value="0x07"/>
+      <!-- Place the object in the center of its container in both the vertical and horizontal axis, not changing its size. -->
+      <flag name="center" value="0x11"/>
+      <!-- Grow the horizontal and vertical size of the object if needed so it completely fills its container. -->
+      <flag name="fill" value="0x77"/>
+      <!-- Additional option that can be set to have the top and/or bottom edges of
+      the child clipped to its container's bounds.
+      The clip will be based on the vertical gravity: a top gravity will clip the bottom
+      edge, a bottom gravity will clip the top edge, and neither will clip both edges. -->
+      <flag name="clip_vertical" value="0x80"/>
+      <!-- Additional option that can be set to have the left and/or right edges of
+      the child clipped to its container's bounds.
+      The clip will be based on the horizontal gravity: a left gravity will clip the right
+      edge, a right gravity will clip the left edge, and neither will clip both edges. -->
+      <flag name="clip_horizontal" value="0x08"/>
+      <!-- Push object to the beginning of its container, not changing its size. -->
+      <flag name="start" value="0x00800003"/>
+      <!-- Push object to the end of its container, not changing its size. -->
+      <flag name="end" value="0x00800005"/>
+    </attr>
+
+  </declare-styleable>
+</resources>
