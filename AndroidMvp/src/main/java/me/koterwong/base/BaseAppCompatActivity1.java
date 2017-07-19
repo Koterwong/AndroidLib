@@ -7,7 +7,6 @@ package me.koterwong.base;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.design.widget.Snackbar;
@@ -23,7 +22,6 @@ import me.koterwong.annotation.KMainActivity;
 import me.koterwong.common.LogKw;
 import me.koterwong.di.component.AppComponent;
 import me.koterwong.mvp.BaseContract;
-import me.koterwong.statusbartint.StatusBarCompat;
 import me.koterwong.utils.IntentHandler;
 import me.koterwong.utils.KeyboardUtils;
 import me.koterwong.widget.TipsToast;
@@ -74,9 +72,7 @@ public abstract class BaseAppCompatActivity1<D extends ViewDataBinding> extends 
   @LayoutRes
   protected abstract int getLayoutId();
 
-  protected void setStatusBar() {
-    StatusBarCompat.setColor(this, Color.parseColor("#FF0000"));
-  }
+  protected void setStatusBar() {}
 
   protected void setupTitle() {}
 

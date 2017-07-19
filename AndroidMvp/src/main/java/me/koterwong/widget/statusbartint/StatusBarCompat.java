@@ -1,4 +1,4 @@
-package me.koterwong.statusbartint;
+package me.koterwong.widget.statusbartint;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +12,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 /**
+ *
+ * 废弃，使用StatusBarUtil.  https://github.com/laobie/StatusBarUtil
+ *
  * Created by Koterwong on 2016/8/10.
  * <p/>
  * decorView：最顶级View包括titlebar和contentView contentView：android.R.id.content 的FrameLayout
