@@ -66,5 +66,4 @@ dependencies {
   compile project(':AndroidStatusBarUtil')
   compile files('libs/umeng-analytics-v6.0.1.jar')
   compile files('libs/jpush-android-2.1.9.jar')
-  compile project(':AndroidSpringView')
 }
