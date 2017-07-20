@@ -35,22 +35,22 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by Koterwong on 2016/9/29 15:13
- *
+ * <p>
  * 使用RxJava实现的banner 轮播条。
- *
+ * <p>
  * 使用方法，直接在布局文件中声明。然后使用如下方式绑定图片。
- *
+ * <p>
  * mSlideLayout
  * .bind(mimg)
  * .setPagerTransform(new ZoomInTransformer())
  * .withListener(new SlideLayout.SlideItemClick() {
- *
  * @Override public void onSlideItemClick(int position) {
  * Toast.makeText(mAppContext, "" + position, Toast.LENGTH_SHORT).show();
  * }
  * });
  */
-public class SlideLayout extends FrameLayout implements ViewPager.OnPageChangeListener {
+
+public class SlideLayout extends FrameLayout implements ViewPager.OnPageChangeListener{
   private static final String TAG = SlideLayout.class.getSimpleName();
 
   /** indicator */
@@ -76,15 +76,15 @@ public class SlideLayout extends FrameLayout implements ViewPager.OnPageChangeLi
 
   private SlideItemClick mListener;
 
-  public SlideLayout(Context context) {
+  public SlideLayout(Context context){
     this(context, null);
   }
 
-  public SlideLayout(Context context, AttributeSet attrs) {
+  public SlideLayout(Context context, AttributeSet attrs){
     this(context, attrs, -1);
   }
 
-  public SlideLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+  public SlideLayout(Context context, AttributeSet attrs, int defStyleAttr){
     super(context, attrs, defStyleAttr);
     this.mContext = context;
     final float density = context.getResources().getDisplayMetrics().density;
@@ -95,7 +95,7 @@ public class SlideLayout extends FrameLayout implements ViewPager.OnPageChangeLi
     this.init(context);
   }
 
-  private void initAttr(Context context, AttributeSet attrs) {
+  private void initAttr(Context context, AttributeSet attrs){
     TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SlideLayout);
 
     mIndicatorSize = (int) ta.getDimension(R.styleable.SlideLayout_indicator_size, mIndicatorSize);
@@ -107,13 +107,13 @@ public class SlideLayout extends FrameLayout implements ViewPager.OnPageChangeLi
 //    if (getResources().getDrawable(mIndicatorDrawable) != null && getResources().getDrawable(mIndicatorDrawable) instanceof StateListDrawable) {
 //      LogKw.e("Failed to load attribute bg_selected. it's must be a StateListDrawable and used normal enable state");
 //    } else {
-      mIndicatorDrawable = R.drawable.selector_slide_layout_indcitor;
+    mIndicatorDrawable = R.drawable.selector_slide_layout_indcitor;
 //    }
 
     ta.recycle();
   }
 
-  private void init(Context context) {
+  private void init(Context context){
     View view = LayoutInflater.from(context).inflate(R.layout.widget_slide_layout, this, true);
     mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
     mIndictorLayout = (LinearLayout) view.findViewById(R.id.ll_indicator);
@@ -122,25 +122,25 @@ public class SlideLayout extends FrameLayout implements ViewPager.OnPageChangeLi
   }
 
   @Override
-  public boolean dispatchTouchEvent(MotionEvent ev) {
+  public boolean dispatchTouchEvent(MotionEvent ev){
     int action = ev.getAction();
-    if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL
+    if(action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL
         || action == MotionEvent.ACTION_OUTSIDE)
       start();
-    else if (action == MotionEvent.ACTION_DOWN)
+    else if(action == MotionEvent.ACTION_DOWN)
       stop();
     return super.dispatchTouchEvent(ev);
   }
 
-  public SlideLayout bind(String[] imgUrls) {
+  public SlideLayout bind(String[] imgUrls){
     bind(Arrays.asList(imgUrls));
     return this;
   }
 
-  public SlideLayout bind(List<String> imgUrls) {
+  public SlideLayout bind(List<String> imgUrls){
     mImageViews.clear();
 
-    for (int i = 0; i < imgUrls.size(); i++) {
+    for(int i = 0; i < imgUrls.size(); i++){
       mImageViews.add(createImageView(imgUrls.get(i)));
     }
 
@@ -151,41 +151,41 @@ public class SlideLayout extends FrameLayout implements ViewPager.OnPageChangeLi
     addIndicator();
     bingListener();
 
-    if (mAutoPlayAble) {
+    if(mAutoPlayAble){
       int zeroItem = Integer.MAX_VALUE / 2 - (Integer.MAX_VALUE / 2) % mImageViews.size();
       mViewPager.setCurrentItem(zeroItem);
     }
     return this;
   }
 
-  private void bingListener() {
-    if (mListener == null) {
+  private void bingListener(){
+    if(mListener == null){
       return;
     }
 
-    for (int i = 0; i < mImageViews.size(); i++) {
+    for(int i = 0; i < mImageViews.size(); i++){
       final int position = i;
-      mImageViews.get(i).setOnClickListener(new OnClickListener() {
-        @Override public void onClick(View v) {
+      mImageViews.get(i).setOnClickListener(new OnClickListener(){
+        @Override public void onClick(View v){
           mListener.onSlideItemClick(position);
         }
       });
     }
   }
 
-  private void addIndicator() {
+  private void addIndicator(){
     mIndictorLayout.removeAllViews();
-    for (int i = 0; i < mImageViews.size(); i++) {
+    for(int i = 0; i < mImageViews.size(); i++){
       ImageView ind = new ImageView(mContext);
       LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(mIndicatorSize, mIndicatorSize);
 
-      if (i != 0) {
+      if(i != 0){
         lp.leftMargin = mIndicatorMargin;
       }
       ind.setLayoutParams(lp);
       ind.setBackgroundResource(R.drawable.selector_slide_layout_indcitor);
       ind.setEnabled(false);
-      if (i == 0) {
+      if(i == 0){
         ind.setEnabled(true);
       }
 
@@ -193,7 +193,7 @@ public class SlideLayout extends FrameLayout implements ViewPager.OnPageChangeLi
     }
   }
 
-  private ImageView createImageView(String s) {
+  private ImageView createImageView(String s){
     ImageView iv = new ImageView(mContext);
     LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
     iv.setLayoutParams(lp);
@@ -207,116 +207,116 @@ public class SlideLayout extends FrameLayout implements ViewPager.OnPageChangeLi
     return iv;
   }
 
-  @Override public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+  @Override public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels){
 
   }
 
-  @Override public void onPageSelected(int position) {
-    if (mImageViews != null && mImageViews.size() > 0) {
+  @Override public void onPageSelected(int position){
+    if(mImageViews != null && mImageViews.size() > 0){
       int size = mImageViews.size();
       int realPos = position % size;
-      for (int i = 0; i < size; i++) {
+      for(int i = 0; i < size; i++){
         mIndictorLayout.getChildAt(i).setEnabled(false);
-        if (i == realPos) {
+        if(i == realPos){
           mIndictorLayout.getChildAt(i).setEnabled(true);
         }
       }
     }
   }
 
-  @Override public void onPageScrollStateChanged(int state) {
+  @Override public void onPageScrollStateChanged(int state){
 
   }
 
 
-  private class SlidePagerAdapter extends PagerAdapter {
+  private class SlidePagerAdapter extends PagerAdapter{
 
-    @Override public int getCount() {
+    @Override public int getCount(){
       return mImageViews.size() == 1 ? 1 : (mAutoPlayAble ? Integer.MAX_VALUE : mImageViews.size());
     }
 
-    @Override public boolean isViewFromObject(View view, Object object) {
+    @Override public boolean isViewFromObject(View view, Object object){
       return view == object;
     }
 
-    @Override public Object instantiateItem(ViewGroup container, int position) {
+    @Override public Object instantiateItem(ViewGroup container, int position){
       ImageView iv = mImageViews.get(position % mImageViews.size());
       container.removeView(iv);
       container.addView(iv);
       return iv;
     }
 
-    @Override public void destroyItem(ViewGroup container, int position, Object object) {
+    @Override public void destroyItem(ViewGroup container, int position, Object object){
 
     }
   }
 
-  public void start() {
-    if (mImageViews.size() < 1) {
+  public void start(){
+    if(mImageViews.size() < 1){
       return;
     }
 
-    if (mSubscription != null && !mSubscription.isUnsubscribed()) {
+    if(mSubscription != null && !mSubscription.isUnsubscribed()){
       mSubscription.unsubscribe();
     }
 
     mSubscription = Observable.interval(DelayTime, TimeUnit.SECONDS)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
-        .subscribe(new Action1<Long>() {
-          @Override public void call(Long aLong) {
+        .subscribe(new Action1<Long>(){
+          @Override public void call(Long aLong){
             mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
           }
         });
 
   }
 
-  public void stop() {
-    if (mImageViews.size() <= 0) {
+  public void stop(){
+    if(mImageViews.size() <= 0){
       return;
     }
 
-    if (!mSubscription.isUnsubscribed()) {
+    if(!mSubscription.isUnsubscribed()){
       mSubscription.unsubscribe();
     }
   }
 
-  public SlideLayout withListener(SlideItemClick listener) {
+  public SlideLayout withListener(SlideItemClick listener){
     mListener = listener;
     bingListener();
     return this;
   }
 
-  public interface SlideItemClick {
+  public interface SlideItemClick{
     void onSlideItemClick(int position);
   }
 
-  public SlideLayout setPagerTransform(ViewPager.PageTransformer pagerTransform) {
+  public SlideLayout setPagerTransform(ViewPager.PageTransformer pagerTransform){
     mViewPager.setPageTransformer(true, pagerTransform);
     return this;
   }
 
-  public SlideLayout setScaleType(ImageView.ScaleType scaleType) {
+  public SlideLayout setScaleType(ImageView.ScaleType scaleType){
     this.mScaleType = scaleType;
     return this;
   }
 
-  public SlideLayout setIndicatorSize(int indicatorSize) {
+  public SlideLayout setIndicatorSize(int indicatorSize){
     mIndicatorSize = indicatorSize;
     return this;
   }
 
-  public SlideLayout setIndicatorMargin(int indicatorMargin) {
+  public SlideLayout setIndicatorMargin(int indicatorMargin){
     mIndicatorMargin = indicatorMargin;
     return this;
   }
 
-  public SlideLayout setIndicatorGravity(int indicatorGravity) {
+  public SlideLayout setIndicatorGravity(int indicatorGravity){
     mIndicatorGravity = indicatorGravity;
     return this;
   }
 
-  public SlideLayout daleyTime(int daleyTime) {
+  public SlideLayout daleyTime(int daleyTime){
     this.DelayTime = daleyTime;
     return this;
   }

@@ -29,7 +29,7 @@ import android.widget.LinearLayout;
  * <p/>
  * 4.待完善...
  */
-public class StatusBarCompat {
+public class StatusBarCompat{
 
   public static final int DEFAULT_STATUS_BRA_ALPHA = 112;
   private static final int TRANSPAEENT = 0X00ffffff;

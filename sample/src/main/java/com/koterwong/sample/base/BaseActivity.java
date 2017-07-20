@@ -6,11 +6,10 @@ package com.koterwong.sample.base;
 
 import android.databinding.ViewDataBinding;
 
-import com.koterwong.sample.R;
+import com.jaeger.library.StatusBarUtil;
 
 import me.koterwong.base.BaseAppCompatActivity;
 import me.koterwong.mvp.BasePresenter;
-import me.koterwong.widget.statusbartint.StatusBarCompat;
 
 
 /**
@@ -18,7 +17,7 @@ import me.koterwong.widget.statusbartint.StatusBarCompat;
  */
 public abstract class BaseActivity<P extends BasePresenter,D extends ViewDataBinding> extends BaseAppCompatActivity<P,D> {
   @Override protected void setStatusBar() {
-    StatusBarCompat.setColor(this, getResources().getColor(R.color.colorPrimaryDark));
+    StatusBarUtil.setTranslucent(this);
   }
 
   @Override protected void setupTitle() {

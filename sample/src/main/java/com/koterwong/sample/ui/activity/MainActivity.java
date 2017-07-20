@@ -40,11 +40,6 @@ public class MainActivity extends BaseActivity {
     return R.layout.activity_main;
   }
 
-  @Override protected void setStatusBar() {
-//    StatusBarCompat.setStatusBarImmersive(this, StatusBarCompat.DEFAULT_STATUS_BRA_ALPHA);
-//    StatusBarCompat.setStatusBarImmersive(this);
-  }
-
   @Override protected void injectComponent(AppComponent appComponent) {
     mListView = (ListView) findViewById(R.id.list_item);
   }
