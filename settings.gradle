@@ -1,1 +1,1 @@
-include ':AndroidMvp',':AndroidPayLib',':AndroidUMShare'
+include ':AndroidMvp', ':AndroidPayLib', ':AndroidUMShare', ':sample'

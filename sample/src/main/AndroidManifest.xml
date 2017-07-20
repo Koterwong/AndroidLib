@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.koterwong.sample">
+
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+  <application
+      android:name="com.koterwong.sample.base.App"
+      android:allowBackup="true"
+      android:icon="@mipmap/ic_launcher"
+      android:label="@string/app_name"
+      android:supportsRtl="true"
+      android:theme="@style/AppTheme">
+
+
+    <activity android:name="com.koterwong.sample.ui.activity.MainActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+    <activity android:name="com.koterwong.sample.ui.activity.LVActivity"/>
+    <activity android:name="com.koterwong.sample.ui.activity.RvActivity"/>
+    <activity android:name="com.koterwong.sample.ui.activity.SlideActivity"/>
+    <activity android:name="com.koterwong.sample.ui.activity.MaterialProgressActivity"/>
+    <activity android:name="com.koterwong.sample.ui.activity.SpotsDialogActivity"/>
+    <activity android:name="com.koterwong.sample.ui.activity.BottomDialogActivity"/>
+    <activity android:name="com.koterwong.sample.ui.activity.DataEpActivity"/>
+    <activity android:name="com.koterwong.sample.ui.activity.StateButtonActivity">
+    </activity>
+    <activity android:name="com.koterwong.sample.ui.activity.TextViewActivity">
+    </activity>
+    <activity android:name="com.koterwong.sample.ui.activity.nvpsample.MvpSampleActivity">
+    </activity>
+    <activity android:name="com.koterwong.sample.ui.activity.TitlebarActivity">
+    </activity>
+  </application>
+
+</manifest>

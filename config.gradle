@@ -6,7 +6,7 @@ ext {
                targetSdkVersion : 25,
                versionCode      : 1,
                versionName      : "1.0",
-               supportVersion   : "25.0.0"
+               supportVersion   : "25.3.1"
     ]
     dependencies = [
             "multidex"                 : "com.android.support:multidex:1.0.1",
@@ -40,6 +40,9 @@ ext {
 
             //状态栏适配工具类
             "statusbarutil"            : "com.jaeger.statusbarutil:library:1.4.0",
+
+            // toast 库
+            "Toasty"                   : "com.github.GrenderG:Toasty:1.2.5",
             //test
             "mockito-core"             : "org.mockito:mockito-core:1.+",
             "canary-debug"             : "com.squareup.leakcanary:leakcanary-android:1.4",

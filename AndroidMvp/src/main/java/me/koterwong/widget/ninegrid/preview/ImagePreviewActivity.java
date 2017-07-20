@@ -2,7 +2,6 @@ package me.koterwong.widget.ninegrid.preview;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -19,8 +18,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import me.koterwong.R;
-import me.koterwong.statusbartint.StatusBarCompat;
 import me.koterwong.widget.ninegrid.ImageInfo;
+import me.koterwong.widget.statusbartint.StatusBarCompat;
 
 public class ImagePreviewActivity extends AppCompatActivity implements ViewTreeObserver.OnPreDrawListener {
 

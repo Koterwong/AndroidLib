@@ -63,6 +63,7 @@ dependencies {
   compile rootProject.ext.dependencies["dagger2-apt-compiler"]
 
   compile rootProject.ext.dependencies["statusbarutil"]
+  compile rootProject.ext.dependencies["Toasty"]
 
 
   debugCompile rootProject.ext.dependencies["canary-debug"]
