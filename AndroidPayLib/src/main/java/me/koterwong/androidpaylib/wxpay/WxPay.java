@@ -23,24 +23,24 @@ import java.util.Random;
 
 import me.koterwong.androidpaylib.Constants;
 
-public class WxPay {
+public class WxPay{
 
   private static WxPay sWxPay;
 
-  public static WxPay getWxPay() {
-    if (sWxPay == null) {
+  public static WxPay getWxPay(){
+    if(sWxPay == null){
       sWxPay = new WxPay();
     }
     return sWxPay;
   }
 
-  private WxPay() {
+  private WxPay(){
     sWxPay = this;
   }
 
   private WxCallBack mWxCallBack;
 
-  public interface WxCallBack {
+  public interface WxCallBack{
     //code = 0 为成功，参考微信App支付文档
     void payResponse(int code);
   }
@@ -48,10 +48,10 @@ public class WxPay {
   /**
    * 生成签名
    */
-  public static String genPackageSign(List<NameValuePair> params) {
+  public static String genPackageSign(List<NameValuePair> params){
     StringBuilder sb = new StringBuilder();
 
-    for (int i = 0; i < params.size(); i++) {
+    for(int i = 0; i < params.size(); i++){
       sb.append(params.get(i).getName());
       sb.append('=');
       sb.append(params.get(i).getValue());
@@ -64,8 +64,8 @@ public class WxPay {
     return packageSign;
   }
 
-  public static String genProductArgs(String orderId, String goods_name, String fee, String back_url) {
-    try {
+  public static String genProductArgs(String orderId, String goods_name, String fee, String back_url){
+    try{
       String nonceStr = genNonceStr();
       List<NameValuePair> packageParams = new LinkedList<NameValuePair>();
       packageParams.add(new BasicNameValuePair("appid", Constants.WxPay.APP_ID));
@@ -81,21 +81,22 @@ public class WxPay {
       String sign = genPackageSign(packageParams);
       packageParams.add(new BasicNameValuePair("sign", sign));
       String xmlstring = toXml(packageParams);
-      return xmlstring;
-    } catch (Exception e) {
+
+      return new String(xmlstring.toString().getBytes(), "ISO8859-1");   //解决body不能使用中文。
+    }catch(Exception e){
       return null;
     }
   }
 
-  public static String genNonceStr() {
+  public static String genNonceStr(){
     Random random = new Random();
     return MD5.getMessageDigest(String.valueOf(random.nextInt(10000)).getBytes());
   }
 
-  public static String toXml(List<NameValuePair> params) {
+  public static String toXml(List<NameValuePair> params){
     StringBuilder sb = new StringBuilder();
     sb.append("<xml>");
-    for (int i = 0; i < params.size(); i++) {
+    for(int i = 0; i < params.size(); i++){
       sb.append("<" + params.get(i).getName() + ">");
       sb.append(params.get(i).getValue());
       sb.append("</" + params.get(i).getName() + ">");
@@ -104,24 +105,24 @@ public class WxPay {
     return sb.toString();
   }
 
-  private static String genOutTradNo() {
+  private static String genOutTradNo(){
     Random random = new Random();
     return MD5.getMessageDigest(String.valueOf(random.nextInt(10000)).getBytes());
   }
 
-  public Map<String, String> decodeXml(String content) {
-    try {
+  public Map<String, String> decodeXml(String content){
+    try{
       Map<String, String> xml = new HashMap<String, String>();
       XmlPullParser parser = Xml.newPullParser();
       parser.setInput(new StringReader(content));
       int event = parser.getEventType();
-      while (event != XmlPullParser.END_DOCUMENT) {
+      while(event != XmlPullParser.END_DOCUMENT){
         String nodeName = parser.getName();
-        switch (event) {
+        switch(event){
           case XmlPullParser.START_DOCUMENT:
             break;
           case XmlPullParser.START_TAG:
-            if ("xml".equals(nodeName) == false) {
+            if("xml".equals(nodeName) == false){
               //实例化student对象
               xml.put(nodeName, parser.nextText());
             }
@@ -132,14 +133,14 @@ public class WxPay {
         event = parser.next();
       }
       return xml;
-    } catch (Exception e) {
+    }catch(Exception e){
       Log.e("orion", e.toString());
     }
     return null;
 
   }
 
-  private class GetPrepayIdTask extends AsyncTask<Void, Void, Map<String, String>> {
+  private class GetPrepayIdTask extends AsyncTask<Void, Void, Map<String, String>>{
     private String order_id;
     private Context context;
     private String goods_name;
@@ -147,7 +148,7 @@ public class WxPay {
     private String fee;
     private ProgressDialog mProgressDialog;
 
-    GetPrepayIdTask(Context context, String order_id, String goods_name, String fee, String back_url) {
+    GetPrepayIdTask(Context context, String order_id, String goods_name, String fee, String back_url){
       this.context = context;
       this.order_id = order_id;
       this.goods_name = goods_name;
@@ -157,14 +158,14 @@ public class WxPay {
     }
 
     @Override
-    protected void onPreExecute() {
+    protected void onPreExecute(){
       if(mProgressDialog != null){
         mProgressDialog.show();
       }
     }
 
     @Override
-    protected void onPostExecute(Map<String, String> result) {
+    protected void onPostExecute(Map<String, String> result){
       if(mProgressDialog != null && mProgressDialog.isShowing()){
         mProgressDialog.dismiss();
       }
@@ -173,12 +174,12 @@ public class WxPay {
     }
 
     @Override
-    protected void onCancelled() {
+    protected void onCancelled(){
       super.onCancelled();
     }
 
     @Override
-    protected Map<String, String> doInBackground(Void... params) {
+    protected Map<String, String> doInBackground(Void... params){
 
       String url = String.format("https://api.mch.weixin.qq.com/pay/unifiedorder");
       String entity = genProductArgs(order_id, goods_name, fee, back_url);
@@ -192,7 +193,7 @@ public class WxPay {
   }
 
 
-  private void genPayReq(Context context, String prepay_id) {
+  private void genPayReq(Context context, String prepay_id){
     PayReq req = new PayReq();
     req.appId = Constants.WxPay.APP_ID;
     req.partnerId = Constants.WxPay.WX_SHOP_NUM;
@@ -217,14 +218,14 @@ public class WxPay {
 
   }
 
-  private long genTimeStamp() {
+  private long genTimeStamp(){
     return System.currentTimeMillis() / 1000;
   }
 
-  private String genAppSign(List<NameValuePair> params) {
+  private String genAppSign(List<NameValuePair> params){
     StringBuilder sb = new StringBuilder();
 
-    for (int i = 0; i < params.size(); i++) {
+    for(int i = 0; i < params.size(); i++){
       sb.append(params.get(i).getName());
       sb.append('=');
       sb.append(params.get(i).getValue());
@@ -239,24 +240,22 @@ public class WxPay {
 
   /**
    * 支付 //商品名中文冲突 详情genProductArgs()方法
-   *
    * @param context
    * @param goods_name
    * @param fee
    * @param back_url
    */
-  public void pay(Context context, String order_id, String goods_name, String fee, String back_url, WxCallBack wxcallabck) {
+  public void pay(Context context, String order_id, String goods_name, String fee, String back_url, WxCallBack wxcallabck){
     this.mWxCallBack = wxcallabck;
     new GetPrepayIdTask(context, order_id, goods_name, fee, back_url).execute();
   }
 
   /**
    * 在 WxEntryActivity中返回该方法，拿到支付结果。
-   *
    * @param code
    */
-  public void onRes(int code) {
-    if (mWxCallBack != null) {
+  public void onRes(int code){
+    if(mWxCallBack != null){
       mWxCallBack.payResponse(code);
     }
   }
